@@ -19,7 +19,7 @@ class BusinessCell: UITableViewCell {
     @IBOutlet weak var reviewsLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var typeOfBusinessLabel: UILabel!
+    @IBOutlet weak var categories: UILabel!
     
     var business : Business? {
         didSet {
@@ -40,16 +40,42 @@ class BusinessCell: UITableViewCell {
             self.thumbnailImage.image = nil;
             if let url = business?.imageURL {
                 self.thumbnailImage.setImageWith(url);
+                self.thumbnailImage.setImageWith(URLRequest(url: url), placeholderImage: nil,
+                                                 success: { (urlRequest, imageResponse, image) in
+                                                    if imageResponse != nil {
+                                                        
+                                                        self.thumbnailImage?.alpha = 0.0
+                                                        self.thumbnailImage?.image = image
+                                                        self.thumbnailImage?.contentMode = UIViewContentMode.scaleToFill
+                                                        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                                                            self.thumbnailImage?.alpha = 1.0
+                                                        })
+                                                    } else {
+                                                        
+                                                        self.thumbnailImage?.image = image
+                                                        self.thumbnailImage?.contentMode = UIViewContentMode.scaleToFill
+                                                    }
+                    }, failure: { (urlRequest, urlResponse, error) in
+                        
+                })
                 
                 self.thumbnailImage.layer.cornerRadius = 5
                 self.thumbnailImage.clipsToBounds = true;
             }
+            
+            self.categories.text = business?.categories
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+       // self.name.preferredMaxLayoutWidth = self.name.frame.width
         // Initialization code
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews();
+       // self.name.preferredMaxLayoutWidth = self.name.frame.width
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -12,24 +12,37 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    var searchBar : UISearchBar!
     var businesses: [Business]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
+        // setup search bar
+        searchBar = UISearchBar();
+        searchBar.sizeToFit()
+        navigationItem.titleView = searchBar
+        
+        
+        // setup table view
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.estimatedRowHeight = 130
-        self.tableView.rowHeight = 100 // UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 100
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+        // initiate basic search
+        Business.searchWithTerm(term: "Restaurants", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
             self.tableView.reloadData()
             if let businesses = businesses {
                 for business in businesses {
-                    print(business.name!)
-                    print(business.address!)
+                   // print(business.name!)
+                   // print(business.address!)
+                    print(business.ratingImageURL)
                 }
             }
             
@@ -76,4 +89,27 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
      }
      */
     
+    
+    
+}
+
+extension UIColor {
+    convenience init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.scanLocation = 0
+        
+        var rgbValue: UInt64 = 0
+        
+        scanner.scanHexInt64(&rgbValue)
+        
+        let r = (rgbValue & 0xff0000) >> 16
+        let g = (rgbValue & 0xff00) >> 8
+        let b = rgbValue & 0xff
+        
+        self.init(
+            red: CGFloat(r) / 0xff,
+            green: CGFloat(g) / 0xff,
+            blue: CGFloat(b) / 0xff, alpha: 1
+        )
+    }
 }
