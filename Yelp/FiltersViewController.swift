@@ -15,11 +15,13 @@ public struct Settings {
     var distanceExpanded = false;
     var offeringADeal = false;
     
-    var distanceIndex = 0
+    var distanceSelectedIndex = 0
     let distances = ["Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"];
     
-    var sortByIndex = 0
+    var sortBySelectedIndex = 0
     let sortBy = ["Best Match", "Distance", "Highest Rated"];
+    
+    var categorySelectedIndex = -1;
 
 }
 
@@ -46,6 +48,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
@@ -70,71 +73,78 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
        
     }
     
+    func dealCell () -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell;
+        cell.switchLabel.text = "Offering a Deal"
+        cell.delegate = self
+        return cell
+    }
+    
+    func distanceCell(indexPath : IndexPath) -> UITableViewCell {
+        if self.settings.distanceExpanded == false {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "ExpandCell") as! ExpandCell
+            cell.expandLabel.text = self.settings.distances[self.settings.distanceSelectedIndex]
+            return cell
+        } else {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
+            cell.radioButtonLabel.text = self.settings.distances[indexPath.row]
+            return cell
+        }
+    }
+    
+    func sortByCell(indexPath : IndexPath) -> UITableViewCell {
+        if self.settings.sortByExpanded == false {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "ExpandCell") as! ExpandCell
+            cell.expandLabel.text = self.settings.sortBy[self.settings.sortBySelectedIndex]
+            return cell
+        } else {
+            let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
+            cell.radioButtonLabel.text = self.settings.sortBy[indexPath.row]
+            return cell
+        }
+    }
+    
+    func categoriesCell(indexPath : IndexPath) -> UITableViewCell {
+        if self.settings.seeAll == false {
+            if indexPath.row >= 0 && indexPath.row < 3 {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
+                cell.switchLabel.text = self.categories[indexPath.row]["name"]
+                return cell
+            } else {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
+                cell.seeMoreLabel.text =  "See More"
+                return cell
+            }
+        } else {
+            if indexPath.row >= 1 && indexPath.row <= self.categories.count {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
+                cell.switchLabel.text = self.categories[indexPath.row - 1]["name"]
+                return cell
+            } else {
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
+                cell.seeMoreLabel.text =  "See Less"
+                return cell
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
         case 0:
-            let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell;
-            cell.switchLabel.text = "Offering a Deal"
-            cell.delegate = self
-            return cell
+            return dealCell()
         case 1:
-            if self.settings.distanceExpanded == false {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "ExpandCell") as! ExpandCell
-                cell.expandLabel.text = self.settings.distances[self.settings.distanceIndex]
-                return cell
-            } else {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
-                cell.radioButtonLabel.text = self.settings.distances[indexPath.row]
-                return cell
-            }
+            return distanceCell(indexPath: indexPath)
         case 2:
-            if self.settings.sortByExpanded == false {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "ExpandCell") as! ExpandCell
-                cell.expandLabel.text = self.settings.sortBy[self.settings.sortByIndex]
-                return cell
-            } else {
-                let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
-                cell.radioButtonLabel.text = self.settings.sortBy[indexPath.row]
-                return cell
-            }
+            return sortByCell(indexPath: indexPath)
         case 3:
-            if self.settings.seeAll == false {
-                if indexPath.row >= 0 && indexPath.row < 3 {
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
-                    cell.switchLabel.text = self.categories[indexPath.row]["name"]
-                    return cell
-                } else {
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
-                    cell.seeMoreLabel.text =  "See More"
-                    return cell
-                }
-            } else {
-                if indexPath.row >= 0 && indexPath.row < self.categories.count {
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
-                    cell.switchLabel.text = self.categories[indexPath.row]["name"]
-                    return cell
-                } else {
-                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
-                    cell.seeMoreLabel.text =  "See Less"
-                }
-            }
+            return categoriesCell(indexPath : indexPath)
         default:
             return UITableViewCell()
         }
-        return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
-            self.settings.distanceExpanded = !self.settings.distanceExpanded;
-            self.tableView.reloadData()
-        } else if indexPath.section == 2 {
-            self.settings.sortByExpanded = !self.settings.sortByExpanded;
-            self.tableView.reloadData()
-        }
-    }
-    
+ 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
@@ -148,10 +158,69 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    // MARK: - UITableViewDelegate
+    
+    func distanceSectionSelected(indexPath : IndexPath) {
+        // 1. save the distance selected index if section is expanded
+        if self.settings.distanceExpanded == true {
+            self.settings.distanceSelectedIndex = indexPath.row
+        }
+        
+        // 2. toggle distance section
+        self.settings.distanceExpanded = !self.settings.distanceExpanded;
+        
+        // 3. reload table with animation
+        let indexSet = IndexSet(indexPath)
+        self.tableView.reloadSections(indexSet, with: .fade)
+    }
+    
+    func sortBySectionSelected(indexPath : IndexPath) {
+        
+        // 1. save the sort by selected index if section is expanded
+        if self.settings.sortByExpanded == true {
+            self.settings.sortBySelectedIndex = indexPath.row
+        }
+        
+        // 2. toggle the sort by section
+        self.settings.sortByExpanded = !self.settings.sortByExpanded;
+        
+        // 3. reload table with animation
+        let indexSet = IndexSet(indexPath)        
+        self.tableView.reloadSections(indexSet, with: .fade)
+    }
+    
+    func  categorySectionSelected(indexPath : IndexPath) {
+
+        // if this is a toggle request then toggle the seeAll bool
+        if (self.settings.seeAll == false && indexPath.row == 3) ||
+            (self.settings.seeAll == true  && indexPath.row == 0) {
+            self.settings.seeAll = !self.settings.seeAll
+            let indexSet = IndexSet(indexPath)
+            self.tableView.reloadSections(indexSet, with: .fade)
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 1 {
+            distanceSectionSelected(indexPath: indexPath)
+        } else if indexPath.section == 2 {
+            sortBySectionSelected(indexPath: indexPath)
+        } else if indexPath.section == 3 {
+            categorySectionSelected(indexPath: indexPath)
+        }
+        self.tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    // MARK: - SwitchCellDelegate
     func switchStateChanged(sender: SwitchCell, state: Bool) {
         let indexPath = self.tableView.indexPath(for: sender);
         
     }
+    
+    
     
     
     func yelpCategories() -> [[String:String]] {
