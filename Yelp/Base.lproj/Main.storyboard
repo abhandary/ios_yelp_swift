@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -169,7 +170,7 @@
                                             <outlet property="switchLabel" destination="QBk-x3-avC" id="WHU-c0-hd1"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" editingAccessoryType="checkmark" id="jih-ke-koX" customClass="ExpandCell" customModule="Yelp" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ExpandCell" editingAccessoryType="checkmark" id="jih-ke-koX" customClass="ExpandCell" customModule="Yelp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="105" width="375" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jih-ke-koX" id="HLg-xv-DvU">
@@ -199,29 +200,52 @@
                                             <outlet property="expandLabel" destination="jz5-Hn-MVo" id="RNp-sG-EOd"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qPg-JP-Yqe">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RadioButtonCell" id="qPg-JP-Yqe" customClass="RadioButtonCell" customModule="Yelp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="182" width="375" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qPg-JP-Yqe" id="xUg-um-8oV">
                                             <frame key="frameInset" width="375" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdA-o8-5gi">
-                                                    <frame key="frameInset" minX="41" minY="28" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdA-o8-5gi">
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPg-PD-doW">
-                                                    <frame key="frameInset" minX="294" minY="24" width="46" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPg-PD-doW" customClass="DLRadioButton"/>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="QPg-PD-doW" secondAttribute="trailing" constant="27" id="HVu-XF-fmZ"/>
+                                                <constraint firstItem="qdA-o8-5gi" firstAttribute="centerY" secondItem="xUg-um-8oV" secondAttribute="centerY" id="I61-IM-y8u"/>
                                                 <constraint firstItem="qdA-o8-5gi" firstAttribute="leading" secondItem="xUg-um-8oV" secondAttribute="leading" constant="36" id="R1D-i0-jXn"/>
+                                                <constraint firstItem="QPg-PD-doW" firstAttribute="centerY" secondItem="xUg-um-8oV" secondAttribute="centerY" id="k7I-OX-tH8"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="radioButtonLabel" destination="qdA-o8-5gi" id="3zU-FR-wZl"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SeeMoreCell" id="bXf-Q9-fbu" customClass="SeeMoreCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="259" width="375" height="77"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bXf-Q9-fbu" id="UEf-5Q-Phj">
+                                            <frame key="frameInset" width="375" height="76"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s42-oG-SBL">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="s42-oG-SBL" firstAttribute="centerY" secondItem="UEf-5Q-Phj" secondAttribute="centerY" id="Df5-Jl-sCX"/>
+                                                <constraint firstItem="s42-oG-SBL" firstAttribute="centerX" secondItem="UEf-5Q-Phj" secondAttribute="centerX" id="syf-WW-rG6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="seeMoreLabel" destination="s42-oG-SBL" id="jNx-Ra-Ij8"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

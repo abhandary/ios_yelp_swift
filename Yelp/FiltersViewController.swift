@@ -37,6 +37,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.rowHeight = 50
         // Do any additional setup after loading the view.
     }
 
@@ -62,7 +63,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         case 2:
             return self.settings.sortByExpanded ? 3 : 1
         case 3:
-            return self.settings.seeAll ?  self.categories.count : 4
+            return self.settings.seeAll ?  self.categories.count + 1 : 4
         default :
             return 0
         }
@@ -83,7 +84,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.expandLabel.text = self.settings.distances[self.settings.distanceIndex]
                 return cell
             } else {
-                
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
+                cell.radioButtonLabel.text = self.settings.distances[indexPath.row]
+                return cell
             }
         case 2:
             if self.settings.sortByExpanded == false {
@@ -91,18 +94,58 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 cell.expandLabel.text = self.settings.sortBy[self.settings.sortByIndex]
                 return cell
             } else {
-                
+                let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
+                cell.radioButtonLabel.text = self.settings.sortBy[indexPath.row]
+                return cell
             }
-            
+        case 3:
+            if self.settings.seeAll == false {
+                if indexPath.row >= 0 && indexPath.row < 3 {
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
+                    cell.switchLabel.text = self.categories[indexPath.row]["name"]
+                    return cell
+                } else {
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
+                    cell.seeMoreLabel.text =  "See More"
+                    return cell
+                }
+            } else {
+                if indexPath.row >= 0 && indexPath.row < self.categories.count {
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
+                    cell.switchLabel.text = self.categories[indexPath.row]["name"]
+                    return cell
+                } else {
+                    let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
+                    cell.seeMoreLabel.text =  "See Less"
+                }
+            }
         default:
             return UITableViewCell()
-            
         }
-        
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell;
-        cell.switchLabel.text = self.categories[indexPath.row]["name"]!
-        cell.delegate = self
-        return cell
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            self.settings.distanceExpanded = !self.settings.distanceExpanded;
+            self.tableView.reloadData()
+        } else if indexPath.section == 2 {
+            self.settings.sortByExpanded = !self.settings.sortByExpanded;
+            self.tableView.reloadData()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return nil
+        case 1:
+            return "Distance"
+        case 2:
+            return "Sort By"
+        default:
+            return "Category"
+        }
     }
     
     func switchStateChanged(sender: SwitchCell, state: Bool) {
