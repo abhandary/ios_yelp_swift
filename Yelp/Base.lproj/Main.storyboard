@@ -393,11 +393,11 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="US4-pc-8iM">
-                                        <rect key="frame" x="0.0" y="445" width="375" height="50"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="60" id="US4-pc-8iM">
+                                        <rect key="frame" x="0.0" y="445" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="US4-pc-8iM" id="Yu8-aQ-W8V">
-                                            <frame key="frameInset" width="342" height="49"/>
+                                            <frame key="frameInset" width="342" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1943 W El Camino Real, Mountain View, CA 94040" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJr-NP-4js">
@@ -417,37 +417,37 @@
                             </tableViewSection>
                             <tableViewSection id="v21-D0-QZa">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="66" id="Jm0-oX-Np1">
-                                        <rect key="frame" x="0.0" y="495" width="375" height="66"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Jm0-oX-Np1">
+                                        <rect key="frame" x="0.0" y="505" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jm0-oX-Np1" id="10g-6x-aWm">
-                                            <frame key="frameInset" width="375" height="65"/>
+                                            <frame key="frameInset" width="375" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WCJ-Kb-f14">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone" translatesAutoresizingMaskIntoConstraints="NO" id="WCJ-Kb-f14">
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="Pqd-4Y-W1Z"/>
-                                                        <constraint firstAttribute="height" constant="30" id="SM9-Fz-CmK"/>
+                                                        <constraint firstAttribute="width" constant="25" id="Pqd-4Y-W1Z"/>
+                                                        <constraint firstAttribute="height" constant="25" id="SM9-Fz-CmK"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Call" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2a-Zw-SBZ">
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(650) 965-8301" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHe-8e-PAz">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="LHe-8e-PAz" firstAttribute="top" secondItem="W2a-Zw-SBZ" secondAttribute="bottom" constant="3" id="73R-Fi-6rD"/>
                                                 <constraint firstItem="LHe-8e-PAz" firstAttribute="leading" secondItem="WCJ-Kb-f14" secondAttribute="trailing" constant="21" id="82r-rT-q4W"/>
                                                 <constraint firstItem="WCJ-Kb-f14" firstAttribute="centerY" secondItem="10g-6x-aWm" secondAttribute="centerY" id="Aer-PJ-2z7"/>
                                                 <constraint firstItem="LHe-8e-PAz" firstAttribute="leading" secondItem="WCJ-Kb-f14" secondAttribute="trailing" constant="21" id="YWs-w6-asd"/>
-                                                <constraint firstItem="W2a-Zw-SBZ" firstAttribute="top" secondItem="10g-6x-aWm" secondAttribute="top" constant="12" id="Z2B-Lp-z1B"/>
-                                                <constraint firstItem="LHe-8e-PAz" firstAttribute="top" secondItem="10g-6x-aWm" secondAttribute="top" constant="32" id="cSL-kH-uU4"/>
-                                                <constraint firstItem="WCJ-Kb-f14" firstAttribute="leading" secondItem="10g-6x-aWm" secondAttribute="leadingMargin" constant="9" id="rdU-gG-BPA"/>
+                                                <constraint firstItem="W2a-Zw-SBZ" firstAttribute="top" secondItem="10g-6x-aWm" secondAttribute="top" constant="5" id="Z2B-Lp-z1B"/>
+                                                <constraint firstItem="WCJ-Kb-f14" firstAttribute="leading" secondItem="10g-6x-aWm" secondAttribute="leadingMargin" constant="10" id="rdU-gG-BPA"/>
                                                 <constraint firstItem="W2a-Zw-SBZ" firstAttribute="leading" secondItem="WCJ-Kb-f14" secondAttribute="trailing" constant="21" id="vtM-Zy-hHR"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -478,5 +478,6 @@
     </scenes>
     <resources>
         <image name="down-arrow" width="64" height="64"/>
+        <image name="phone" width="15" height="15"/>
     </resources>
 </document>
