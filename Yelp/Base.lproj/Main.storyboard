@@ -212,16 +212,25 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPg-PD-doW" customClass="DLRadioButton"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Odk-eY-uJX" customClass="DLRadioButton">
+                                                    <state key="normal">
+                                                        <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="buttonSelected:" destination="qPg-JP-Yqe" eventType="touchUpInside" id="qtE-mf-4Wq"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="QPg-PD-doW" secondAttribute="trailing" constant="27" id="HVu-XF-fmZ"/>
                                                 <constraint firstItem="qdA-o8-5gi" firstAttribute="centerY" secondItem="xUg-um-8oV" secondAttribute="centerY" id="I61-IM-y8u"/>
                                                 <constraint firstItem="qdA-o8-5gi" firstAttribute="leading" secondItem="xUg-um-8oV" secondAttribute="leading" constant="36" id="R1D-i0-jXn"/>
-                                                <constraint firstItem="QPg-PD-doW" firstAttribute="centerY" secondItem="xUg-um-8oV" secondAttribute="centerY" id="k7I-OX-tH8"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Odk-eY-uJX" secondAttribute="trailing" constant="28" id="nAc-R7-GMI"/>
+                                                <constraint firstItem="Odk-eY-uJX" firstAttribute="centerY" secondItem="xUg-um-8oV" secondAttribute="centerY" id="oiV-YH-k0I"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="radioButton" destination="Odk-eY-uJX" id="6qV-F2-xp9"/>
                                             <outlet property="radioButtonLabel" destination="qdA-o8-5gi" id="3zU-FR-wZl"/>
                                         </connections>
                                     </tableViewCell>

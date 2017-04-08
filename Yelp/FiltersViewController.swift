@@ -25,7 +25,14 @@ public struct Settings {
 
 }
 
-class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwitchCellDelegate {
+enum TableViewSection : Int {
+   case deal = 0
+   case distance = 1
+   case sortBy = 2
+   case category = 3
+}
+
+class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwitchCellDelegate, RadioButtonCellDelegate {
 
     var categories : [[String:String]]!
 
@@ -57,15 +64,18 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
+        
+        let sectionEnum = TableViewSection(rawValue: section)!
+        
+        switch sectionEnum {
             
-        case 0:
+        case .deal:
             return 1;
-        case 1:
+        case .distance:
             return self.settings.distanceExpanded ? 5 : 1
-        case 2:
+        case .sortBy:
             return self.settings.sortByExpanded ? 3 : 1
-        case 3:
+        case .category:
             return self.settings.seeAll ?  self.categories.count + 1 : 4
         default :
             return 0
@@ -87,7 +97,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
+            cell.delegate = self
             cell.radioButtonLabel.text = self.settings.distances[indexPath.row]
+            cell.radioButton.isSelected = self.settings.distanceSelectedIndex == indexPath.row ? true : false
             return cell
         }
     }
@@ -99,7 +111,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
+            cell.delegate = self
             cell.radioButtonLabel.text = self.settings.sortBy[indexPath.row]
+            cell.radioButton.isSelected = self.settings.sortBySelectedIndex == indexPath.row ? true : false
             return cell
         }
     }
@@ -130,30 +144,30 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.section {
-        case 0:
+        let sectionEnum = TableViewSection(rawValue: indexPath.section)!
+        switch sectionEnum {
+        case .deal:
             return dealCell()
-        case 1:
+        case .distance:
             return distanceCell(indexPath: indexPath)
-        case 2:
+        case .sortBy:
             return sortByCell(indexPath: indexPath)
-        case 3:
+        case .category:
             return categoriesCell(indexPath : indexPath)
-        default:
-            return UITableViewCell()
         }
     }
     
  
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 0:
+        let sectionEnum = TableViewSection(rawValue: section)!
+        switch sectionEnum {
+        case .deal:
             return nil
-        case 1:
+        case .distance:
             return "Distance"
-        case 2:
+        case .sortBy:
             return "Sort By"
-        default:
+        case .category:
             return "Category"
         }
     }
@@ -203,11 +217,13 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 {
+        let sectionEnum = TableViewSection(rawValue: indexPath.section)!
+        
+        if sectionEnum == .distance {
             distanceSectionSelected(indexPath: indexPath)
-        } else if indexPath.section == 2 {
+        } else if sectionEnum == .sortBy {
             sortBySectionSelected(indexPath: indexPath)
-        } else if indexPath.section == 3 {
+        } else if sectionEnum == .category {
             categorySectionSelected(indexPath: indexPath)
         }
         self.tableView.deselectRow(at: indexPath, animated: true)
@@ -220,7 +236,24 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-    
+    // MARK: - RadioButtonCellDelegate
+    func radioButtonSelected(sender: RadioButtonCell) {
+        
+        // save the selected and collapse the section
+        if let indexPath = self.tableView.indexPath(for: sender),
+            let sectionEnum = TableViewSection(rawValue: indexPath.section) {
+            if sectionEnum == .distance {
+                self.settings.distanceSelectedIndex = indexPath.row
+                self.settings.distanceExpanded = false
+            } else if sectionEnum == .sortBy {
+                self.settings.sortBySelectedIndex = indexPath.row
+                self.settings.sortByExpanded = false
+            }
+            let indexSet = IndexSet(indexPath)
+
+            self.tableView.reloadSections(indexSet, with: .fade)
+        }
+    }
     
     
     func yelpCategories() -> [[String:String]] {

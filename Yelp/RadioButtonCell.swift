@@ -8,10 +8,18 @@
 //
 
 import UIKit
+import DLRadioButton
+
+@objc protocol RadioButtonCellDelegate {
+    func radioButtonSelected(sender : RadioButtonCell);
+}
 
 class RadioButtonCell: UITableViewCell {
 
+    weak var delegate : RadioButtonCellDelegate?
+    
     @IBOutlet weak var radioButtonLabel: UILabel!
+    @IBOutlet weak var radioButton: DLRadioButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,4 +32,7 @@ class RadioButtonCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func buttonSelected(_ sender: DLRadioButton) {
+        self.delegate?.radioButtonSelected(sender: self)
+    }
 }
