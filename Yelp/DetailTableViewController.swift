@@ -51,6 +51,20 @@ class DetailTableViewController: UITableViewController {
             self.mapView.setRegion(adjustedRegion, animated: true)
         }
         
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            self.view.backgroundColor = UIColor.clear
+            
+            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            //always fill the view
+            blurEffectView.frame = self.view.bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            self.view.insertSubview(blurEffectView, at: 0)
+            
+        } else {
+            self.view.backgroundColor = UIColor.black
+        }
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
