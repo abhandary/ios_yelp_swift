@@ -18,6 +18,8 @@
 		31D95BCBCA38716181E686D3 /* Pods_Yelp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */; };
 		47848697133B87663A122E3D /* Pods_YelpTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A1000F3975EB43318C1D4FA /* Pods_YelpTests.framework */; };
 		E27602911E974D95009BC947 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27602901E974D95009BC947 /* BusinessCell.swift */; };
+		E2BA79211E98CD7900EE54CB /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BA79201E98CD7900EE54CB /* DetailTableViewController.swift */; };
+		E2BA79231E98CF0900EE54CB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BA79221E98CF0900EE54CB /* MapKit.framework */; };
 		E2C207291E9764D50034D104 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C207281E9764D50034D104 /* SwitchCell.swift */; };
 		E2C2072B1E9765E30034D104 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C2072A1E9765E30034D104 /* FiltersViewController.swift */; };
 		E2C2072D1E976D890034D104 /* ExpandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C2072C1E976D890034D104 /* ExpandCell.swift */; };
@@ -55,6 +57,8 @@
 		AA3C5CF4FD317D72ABE2AAC4 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Yelp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E27602901E974D95009BC947 /* BusinessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
+		E2BA79201E98CD7900EE54CB /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		E2BA79221E98CF0900EE54CB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E2C207281E9764D50034D104 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		E2C2072A1E9765E30034D104 /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		E2C2072C1E976D890034D104 /* ExpandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpandCell.swift; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BA79231E98CF0900EE54CB /* MapKit.framework in Frameworks */,
 				31D95BCBCA38716181E686D3 /* Pods_Yelp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +170,7 @@
 			children = (
 				22AAAA9B1AEA1EC300A544AF /* BusinessesViewController.swift */,
 				E2C2072A1E9765E30034D104 /* FiltersViewController.swift */,
+				E2BA79201E98CD7900EE54CB /* DetailTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -172,6 +178,7 @@
 		4A7CA25ACD374CA0AC966A24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E2BA79221E98CF0900EE54CB /* MapKit.framework */,
 				AA3C5CF4FD317D72ABE2AAC4 /* Pods.framework */,
 				C79C0AC126EDAA235847CEA2 /* Pods_Yelp.framework */,
 				0A1000F3975EB43318C1D4FA /* Pods_YelpTests.framework */,
@@ -406,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E27602911E974D95009BC947 /* BusinessCell.swift in Sources */,
+				E2BA79211E98CD7900EE54CB /* DetailTableViewController.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
 				E2C2072F1E9771EA0034D104 /* RadioButtonCell.swift in Sources */,
 				E2C2072B1E9765E30034D104 /* FiltersViewController.swift in Sources */,

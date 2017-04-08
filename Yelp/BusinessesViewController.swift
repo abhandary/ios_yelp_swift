@@ -104,15 +104,21 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    /*
+
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+
+    
+    
+//    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "showDetailSegue" {
+//            let detailVC = segue.destination as! DetailTableViewController
+//            let cell = sender as! UITableViewCell
+//            detailVC.business = self.businesses![(self.tableView.indexPath(for: cell)!.row)]
+//        }
+//     }
+
     
     @IBAction func unWindFromSettings(segue : UIStoryboardSegue) {
         if segue.identifier == "searchSegue" {
@@ -128,6 +134,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
             let nvc = segue.destination as! UINavigationController
             let fvc = nvc.topViewController as! FiltersViewController
             fvc.settings = self.settings
+        }
+        else if segue.identifier == "showDetailSegue" {
+            let detailVC = segue.destination as! DetailTableViewController
+            let cell = sender as! BusinessCell
+            self.tableView.deselectRow(at: self.tableView.indexPath(for: cell)!, animated: true)
+            detailVC.business = self.businesses![(self.tableView.indexPath(for: cell)!.row)]
+            detailVC.ratingsImage = cell.starsImageView.image
         }
     }
     
