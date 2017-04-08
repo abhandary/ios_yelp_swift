@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -26,6 +27,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         // setup search bar
         searchBar = UISearchBar();
         searchBar.sizeToFit()
+        searchBar.delegate = self
         navigationItem.titleView = searchBar
         
         
@@ -64,6 +66,27 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    func doSearch() {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        var radius : Int? = nil
+        if self.settings.distanceSelectedIndex > 0 {
+            radius = self.settings.distanceInMeters[self.settings.distanceSelectedIndex]
+        }
+        
+        Business.searchWithTerm(term: self.settings.searchString, sort: YelpSortMode(rawValue:self.settings.sortBySelectedIndex)!, categories: Array(self.settings.selectedCategories), deals: self.settings.offeringADeal, radius:radius) { (businesses, error) in
+            if let error = error {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                print(error)
+                // @todo: show no results found message
+            } else {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.businesses = businesses
+                self.tableView.reloadData()
+            }
+        }
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.businesses?.count ?? 0;
     }
@@ -92,9 +115,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
      */
     
     @IBAction func unWindFromSettings(segue : UIStoryboardSegue) {
-        if segue.identifier == "saveSegue" {
+        if segue.identifier == "searchSegue" {
             let fvc = segue.source as! FiltersViewController
             self.settings = fvc.settings
+            doSearch()
         }
     }
     
@@ -107,6 +131,30 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+}
+
+extension BusinessesViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(true, animated: true)
+        return true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.setShowsCancelButton(false, animated: true)
+        return true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        settings.searchString = searchBar.text!
+        searchBar.resignFirstResponder()
+        doSearch()
+    }
 }
 
 extension UIColor {

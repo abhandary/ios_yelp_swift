@@ -24,17 +24,20 @@ PODS:
     - AFNetworking/NSURLConnection (~> 2.6.0)
     - AFNetworking/NSURLSession (~> 2.6.0)
   - DLRadioButton (1.4.9)
+  - MBProgressHUD (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5)
   - BDBOAuth1Manager
   - DLRadioButton
+  - MBProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   BDBOAuth1Manager: cd5a5872f355ca38180d52ca2dd844f0b0c84797
   DLRadioButton: 7bb8a6e3768b572469ace553391ab4d2af6f9c19
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
 
-PODFILE CHECKSUM: 84f8eb3080bfe1d778a4e55546deb42afba908c0
+PODFILE CHECKSUM: 6701ca3316a7929e2c216fe5bc57f57161987bdf
 
 COCOAPODS: 1.0.1

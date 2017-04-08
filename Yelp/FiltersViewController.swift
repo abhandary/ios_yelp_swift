@@ -9,6 +9,9 @@
 import UIKit
 
 public struct Settings {
+    
+    var searchString  = "Restaurants"
+    
     var seeAll = false
     var bestMatchExpanded = false;
     var sortByExpanded = false;
@@ -17,12 +20,14 @@ public struct Settings {
     
     var distanceSelectedIndex = 0
     let distances = ["Auto", "0.3 miles", "1 mile", "5 miles", "20 miles"];
+    let distanceInMeters = [0, 483, 1609, 8047, 40000]
     
     var sortBySelectedIndex = 0
     let sortBy = ["Best Match", "Distance", "Highest Rated"];
     
     var categorySelectedIndex = -1;
-
+    
+    var selectedCategories = Set<String>()
 }
 
 enum TableViewSection : Int {
@@ -86,6 +91,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell;
         cell.switchLabel.text = "Offering a Deal"
         cell.delegate = self
+        cell.switchButton.isOn = self.settings.offeringADeal
         cell.selectionStyle = .none
         return cell
     }
@@ -126,8 +132,20 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         if self.settings.seeAll == false {
             if indexPath.row >= 0 && indexPath.row < 3 {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
-                cell.switchLabel.text = self.categories[indexPath.row]["name"]
+
                 cell.selectionStyle = .none
+                cell.delegate = self
+
+                
+                // set the lable text
+                cell.switchLabel.text = self.categories[indexPath.row]["name"]
+                
+                // set the switch state
+                if self.settings.selectedCategories.contains(self.categories[indexPath.row]["code"]!) {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
                 return cell
             } else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
@@ -138,8 +156,19 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             if indexPath.row >= 1 && indexPath.row <= self.categories.count {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
-                cell.switchLabel.text = self.categories[indexPath.row - 1]["name"]
+
                 cell.selectionStyle = .none
+                cell.delegate = self
+                
+                // set the lable text
+                cell.switchLabel.text = self.categories[indexPath.row - 1]["name"]
+                
+                // set the switch state
+                if self.settings.selectedCategories.contains(self.categories[indexPath.row]["code"]!) {
+                    cell.switchButton.isOn = true
+                } else {
+                    cell.switchButton.isOn = false
+                }
                 return cell
             } else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
@@ -240,8 +269,18 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     // MARK: - SwitchCellDelegate
     func switchStateChanged(sender: SwitchCell, state: Bool) {
-        let indexPath = self.tableView.indexPath(for: sender);
-        
+        if let indexPath = self.tableView.indexPath(for: sender) {
+            let sectionEnum = TableViewSection(rawValue: indexPath.section)
+            if sectionEnum == .deal {
+                self.settings.offeringADeal = state
+            } else if sectionEnum == .category {
+                if state == true {
+                    self.settings.selectedCategories.insert(self.categories[indexPath.row]["code"]!)
+                } else {
+                    self.settings.selectedCategories.remove(self.categories[indexPath.row]["code"]!)
+                }
+            }
+        }
     }
     
     // MARK: - RadioButtonCellDelegate

@@ -152,7 +152,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AqA-BI-2FF">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AqA-BI-2FF">
                                                     <connections>
                                                         <action selector="switchStateChanged:" destination="xV9-Yc-Nnd" eventType="valueChanged" id="cBN-pS-H6z"/>
                                                     </connections>
@@ -273,9 +273,9 @@
                                 <segue destination="ASN-QM-4y3" kind="unwind" identifier="cancelSegue" unwindAction="unWindFromSettingsWithSegue:" id="rK6-Vl-VJN"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="aXk-0B-kut">
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="aXk-0B-kut">
                             <connections>
-                                <segue destination="ASN-QM-4y3" kind="unwind" identifier="saveSegue" unwindAction="unWindFromSettingsWithSegue:" id="FyA-YU-1uN"/>
+                                <segue destination="ASN-QM-4y3" kind="unwind" identifier="searchSegue" unwindAction="unWindFromSettingsWithSegue:" id="FyA-YU-1uN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
