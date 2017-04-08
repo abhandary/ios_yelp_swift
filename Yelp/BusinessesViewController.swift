@@ -19,6 +19,11 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var settings  = Settings()
     
+    // infinite scroll related
+    var isMoreDataLoading = false
+    var loadLimit         = 20
+    var loadMoreOffset    = 21
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,21 +71,26 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    func doSearch() {
+    func doSearch(offset : Int) {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         var radius : Int? = nil
         if self.settings.distanceSelectedIndex > 0 {
             radius = self.settings.distanceInMeters[self.settings.distanceSelectedIndex]
         }
         
-        Business.searchWithTerm(term: self.settings.searchString, sort: YelpSortMode(rawValue:self.settings.sortBySelectedIndex)!, categories: Array(self.settings.selectedCategories), deals: self.settings.offeringADeal, radius:radius) { (businesses, error) in
-            if let error = error {
+        Business.searchWithTerm(term: self.settings.searchString, sort: YelpSortMode(rawValue:self.settings.sortBySelectedIndex)!, categories: Array(self.settings.selectedCategories), deals: self.settings.offeringADeal, radius:radius, offset:offset) { (businesses, error) in
+            self.isMoreDataLoading = false
+            if error != nil || businesses == nil {
                 MBProgressHUD.hide(for: self.view, animated: true)
                 print(error)
                 // @todo: show no results found message
             } else {
                 MBProgressHUD.hide(for: self.view, animated: true)
-                self.businesses = businesses
+                if offset == 0 {
+                    self.businesses = businesses
+                } else {
+                    self.businesses?.append(contentsOf: businesses!)
+                }
                 self.tableView.reloadData()
             }
         }
@@ -97,6 +107,25 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         return cell;
     }
     
+    
+    // enable inifite scroll
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                
+                isMoreDataLoading = true
+                
+                // load more results
+                doSearch(offset: loadMoreOffset)
+                loadMoreOffset += loadLimit
+            }
+        }
+    }
     
     
     override func didReceiveMemoryWarning() {
@@ -124,7 +153,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         if segue.identifier == "searchSegue" {
             let fvc = segue.source as! FiltersViewController
             self.settings = fvc.settings
-            doSearch()
+            doSearch(offset: 0)
         }
     }
     
@@ -166,7 +195,7 @@ extension BusinessesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         settings.searchString = searchBar.text!
         searchBar.resignFirstResponder()
-        doSearch()
+        doSearch(offset: 0)
     }
 }
 
