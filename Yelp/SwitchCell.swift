@@ -16,8 +16,8 @@ class SwitchCell: UITableViewCell {
 
     weak var delegate : SwitchCellDelegate?
     
-    @IBOutlet weak var switchButton: UISwitch!
     @IBOutlet weak var switchLabel: UILabel!
+    @IBOutlet weak var switchButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +31,17 @@ class SwitchCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func switchButtonClicked(_ sender: UIButton) {
+        
+        UIView.transition(with: sender,
+                          duration: 0.15,
+                          options: .transitionCrossDissolve,
+                          animations: {
+            sender.isSelected = !sender.isSelected
+            }, completion: nil);
+        
+        self.delegate?.switchStateChanged(sender: self, state: sender.isSelected )
+    }
     @IBAction func switchStateChanged(_ sender: UISwitch) {
         self.delegate?.switchStateChanged(sender: self, state: sender.isOn)
     }

@@ -110,7 +110,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell;
         cell.switchLabel.text = "Offering a Deal"
         cell.delegate = self
-        cell.switchButton.isOn = self.settings.offeringADeal
+        cell.switchButton.isSelected = self.settings.offeringADeal
         cell.selectionStyle = .none
         return cell
     }
@@ -161,9 +161,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 // set the switch state
                 if self.settings.selectedCategories.contains(self.categories[indexPath.row]["code"]!) {
-                    cell.switchButton.isOn = true
+                    cell.switchButton.isSelected = true
                 } else {
-                    cell.switchButton.isOn = false
+                    cell.switchButton.isSelected = false
                 }
                 return cell
             } else {
@@ -184,9 +184,9 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 // set the switch state
                 if self.settings.selectedCategories.contains(self.categories[indexPath.row]["code"]!) {
-                    cell.switchButton.isOn = true
+                   cell.switchButton.isSelected = true
                 } else {
-                    cell.switchButton.isOn = false
+                   cell.switchButton.isSelected = false
                 }
                 return cell
             } else {

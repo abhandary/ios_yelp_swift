@@ -154,21 +154,26 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="AqA-BI-2FF">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xEK-b2-fHF">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="70" id="qkM-vZ-PCN"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button" image="yelp_off_transparent"/>
+                                                    <state key="selected" image="yelp_on_transparent"/>
                                                     <connections>
-                                                        <action selector="switchStateChanged:" destination="xV9-Yc-Nnd" eventType="valueChanged" id="cBN-pS-H6z"/>
+                                                        <action selector="switchButtonClicked:" destination="xV9-Yc-Nnd" eventType="touchUpInside" id="Hen-Zf-l7d"/>
                                                     </connections>
-                                                </switch>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="AqA-BI-2FF" firstAttribute="centerY" secondItem="L3I-k1-SWY" secondAttribute="centerY" id="2Iz-tw-Ddy"/>
                                                 <constraint firstItem="QBk-x3-avC" firstAttribute="centerY" secondItem="L3I-k1-SWY" secondAttribute="centerY" id="Y7Q-Vx-sxy"/>
+                                                <constraint firstItem="xEK-b2-fHF" firstAttribute="centerY" secondItem="L3I-k1-SWY" secondAttribute="centerY" id="aPa-0W-PFf"/>
                                                 <constraint firstItem="QBk-x3-avC" firstAttribute="leading" secondItem="L3I-k1-SWY" secondAttribute="leading" constant="36" id="ioy-mS-qsI"/>
-                                                <constraint firstAttribute="trailing" secondItem="AqA-BI-2FF" secondAttribute="trailing" constant="33" id="xMf-mt-dhm"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="xEK-b2-fHF" secondAttribute="trailing" constant="15" id="sOg-bJ-vjO"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="switchButton" destination="AqA-BI-2FF" id="dbt-Go-8Ri"/>
+                                            <outlet property="switchButton" destination="xEK-b2-fHF" id="oyr-t0-lYp"/>
                                             <outlet property="switchLabel" destination="QBk-x3-avC" id="WHU-c0-hd1"/>
                                         </connections>
                                     </tableViewCell>
@@ -521,5 +526,7 @@
     <resources>
         <image name="down-arrow" width="20" height="20"/>
         <image name="phone" width="15" height="15"/>
+        <image name="yelp_off_transparent" width="75" height="32"/>
+        <image name="yelp_on_transparent" width="75" height="36"/>
     </resources>
 </document>
