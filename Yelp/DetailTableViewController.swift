@@ -17,6 +17,11 @@ class DetailTableViewController: UITableViewController {
     var business : Business!
     var ratingsImage : UIImage?
     
+    @IBOutlet weak var topSectionContentView: UIView!
+    @IBOutlet weak var topSectionFirstHalfView: UIView!
+    @IBOutlet weak var topSectionSecondHalfView: UIView!
+    
+    
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var ratingsImageView: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
@@ -32,6 +37,7 @@ class DetailTableViewController: UITableViewController {
         self.name.text = business.name
         self.ratingsImageView.image = ratingsImage
         self.address.text = business.address
+        
         if let distance = business.distance {
             self.distance.text = distance
         }
@@ -51,19 +57,24 @@ class DetailTableViewController: UITableViewController {
             self.mapView.setRegion(adjustedRegion, animated: true)
         }
         
-        if !UIAccessibilityIsReduceTransparencyEnabled() {
-            self.view.backgroundColor = UIColor.clear
-            
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
-            let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //always fill the view
-            blurEffectView.frame = self.view.bounds
-            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            self.view.insertSubview(blurEffectView, at: 0)
-            
-        } else {
-            self.view.backgroundColor = UIColor.black
-        }
+//        if !UIAccessibilityIsReduceTransparencyEnabled() {
+//            self.view.backgroundColor = UIColor.clear
+//            if let thumbnailImageURL = self.business.imageURL {
+//                let thumbnailImageView = UIImageView()
+//                thumbnailImageView.frame = self.topSectionFirstHalfView.bounds
+//                thumbnailImageView.setImageWith(thumbnailImageURL)
+//                thumbnailImageView.contentMode = UIViewContentMode.scaleToFill
+//                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+//                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//                blurEffectView.alpha = 0.01
+//                blurEffectView.frame = self.topSectionFirstHalfView.bounds
+//                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//                self.topSectionFirstHalfView.insertSubview(blurEffectView, at: 0)
+//                self.topSectionFirstHalfView.insertSubview(thumbnailImageView, at: 0)
+//            }
+//        } else {
+//            self.view.backgroundColor = UIColor.black
+//        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -72,10 +83,17 @@ class DetailTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        print(self.topSectionFirstHalfView)
+        print(self.topSectionContentView)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    
 
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 50
