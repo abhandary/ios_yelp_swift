@@ -346,10 +346,10 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sup-f6-ULt">
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-lz-rpp">
-                                                            <frame key="frameInset" minX="67" minY="31" width="240" height="128"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-lz-rpp"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8gC-yU-kUW" customClass="UIVisualEffectView">
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goch Japanese Fusion Tapas" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAQ-8U-WeD">
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                                             <nil key="textColor"/>
@@ -377,13 +377,21 @@
                                                         <constraint firstItem="hAQ-8U-WeD" firstAttribute="leading" secondItem="Sup-f6-ULt" secondAttribute="leading" constant="20" id="0Sj-wd-0sp"/>
                                                         <constraint firstItem="Y7I-1w-IHX" firstAttribute="leading" secondItem="Sup-f6-ULt" secondAttribute="leading" constant="20" id="4KZ-0E-vPw"/>
                                                         <constraint firstItem="hAQ-8U-WeD" firstAttribute="top" secondItem="Sup-f6-ULt" secondAttribute="top" constant="20" id="8Ks-L4-ReC"/>
+                                                        <constraint firstItem="8gC-yU-kUW" firstAttribute="top" secondItem="Sup-f6-ULt" secondAttribute="top" id="8oY-0I-9Oi"/>
+                                                        <constraint firstAttribute="bottom" secondItem="8gC-yU-kUW" secondAttribute="bottom" id="8qg-tH-5nL"/>
+                                                        <constraint firstAttribute="bottom" secondItem="7ve-lz-rpp" secondAttribute="bottom" id="FX8-C8-8S7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="8gC-yU-kUW" secondAttribute="trailing" id="Oli-05-tc4"/>
                                                         <constraint firstItem="Y7I-1w-IHX" firstAttribute="top" secondItem="hAQ-8U-WeD" secondAttribute="bottom" constant="7" id="Ouj-Gz-uqI"/>
+                                                        <constraint firstItem="7ve-lz-rpp" firstAttribute="leading" secondItem="Sup-f6-ULt" secondAttribute="leading" id="STH-p5-pI1"/>
                                                         <constraint firstItem="6qF-lm-2z6" firstAttribute="leading" secondItem="Sup-f6-ULt" secondAttribute="leading" constant="20" id="Tov-h1-Z0O"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7ve-lz-rpp" secondAttribute="trailing" id="UPF-A6-lVZ"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="6qF-lm-2z6" secondAttribute="trailing" constant="20" id="XDj-of-yj4"/>
                                                         <constraint firstItem="cTl-ed-0Jb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hAQ-8U-WeD" secondAttribute="trailing" constant="8" id="aWk-HT-bgz"/>
                                                         <constraint firstAttribute="trailing" secondItem="cTl-ed-0Jb" secondAttribute="trailing" constant="20" id="bdr-rc-1B8"/>
+                                                        <constraint firstItem="7ve-lz-rpp" firstAttribute="top" secondItem="Sup-f6-ULt" secondAttribute="top" id="bmD-b2-1bo"/>
                                                         <constraint firstItem="cTl-ed-0Jb" firstAttribute="top" secondItem="Sup-f6-ULt" secondAttribute="top" constant="27" id="mIg-ez-kpv"/>
                                                         <constraint firstItem="6qF-lm-2z6" firstAttribute="top" secondItem="Y7I-1w-IHX" secondAttribute="bottom" constant="8" id="n5a-Ev-ljR"/>
+                                                        <constraint firstItem="8gC-yU-kUW" firstAttribute="leading" secondItem="Sup-f6-ULt" secondAttribute="leading" id="qUv-RB-aX5"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OMv-ah-2Ju">
@@ -411,7 +419,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="OMv-ah-2Ju" secondAttribute="trailing" id="8ZQ-h3-WIl"/>
-                                                <constraint firstItem="Sup-f6-ULt" firstAttribute="height" secondItem="TDs-9b-Q6t" secondAttribute="height" multiplier="0.5" id="KhL-N2-Hb6"/>
+                                                <constraint firstItem="Sup-f6-ULt" firstAttribute="height" secondItem="TDs-9b-Q6t" secondAttribute="height" multiplier="0.45" id="KhL-N2-Hb6"/>
                                                 <constraint firstItem="Sup-f6-ULt" firstAttribute="top" secondItem="TDs-9b-Q6t" secondAttribute="top" id="TMM-eg-IPA"/>
                                                 <constraint firstItem="OMv-ah-2Ju" firstAttribute="height" secondItem="TDs-9b-Q6t" secondAttribute="height" multiplier="0.5" id="Vru-4B-Ji6"/>
                                                 <constraint firstItem="OMv-ah-2Ju" firstAttribute="leading" secondItem="TDs-9b-Q6t" secondAttribute="leading" id="XVg-EF-hPq"/>
@@ -491,12 +499,15 @@
                     <navigationItem key="navigationItem" id="gaH-bc-GIZ"/>
                     <connections>
                         <outlet property="address" destination="uJr-NP-4js" id="uwF-Cy-Zld"/>
+                        <outlet property="blurEffectView" destination="8gC-yU-kUW" id="1Vf-hz-NJZ"/>
+                        <outlet property="callCell" destination="Jm0-oX-Np1" id="J9u-r2-JhX"/>
                         <outlet property="distance" destination="cTl-ed-0Jb" id="0vr-fB-ry3"/>
                         <outlet property="mapView" destination="m7E-gz-CdJ" id="ihq-zC-5CH"/>
                         <outlet property="name" destination="hAQ-8U-WeD" id="qmU-Jb-T3J"/>
                         <outlet property="phoneNumber" destination="LHe-8e-PAz" id="cFh-4c-4Zi"/>
                         <outlet property="ratingsImageView" destination="Y7I-1w-IHX" id="8wP-JA-dMp"/>
                         <outlet property="snippetText" destination="D6s-vw-TSB" id="exo-LX-6NU"/>
+                        <outlet property="thumbnailImageView" destination="7ve-lz-rpp" id="c4S-Pr-aH1"/>
                         <outlet property="topSectionContentView" destination="TDs-9b-Q6t" id="pe1-fI-gPF"/>
                         <outlet property="topSectionFirstHalfView" destination="Sup-f6-ULt" id="lW6-f7-juF"/>
                         <outlet property="topSectionSecondHalfView" destination="OMv-ah-2Ju" id="NKt-wp-Qck"/>

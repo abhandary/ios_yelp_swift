@@ -21,7 +21,10 @@ class DetailTableViewController: UITableViewController {
     @IBOutlet weak var topSectionFirstHalfView: UIView!
     @IBOutlet weak var topSectionSecondHalfView: UIView!
     
+    @IBOutlet weak var callCell: UITableViewCell!
     
+    @IBOutlet weak var blurEffectView: UIVisualEffectView!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var ratingsImageView: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
@@ -56,6 +59,24 @@ class DetailTableViewController: UITableViewController {
             let adjustedRegion = self.mapView.regionThatFits(viewRegion)
             self.mapView.setRegion(adjustedRegion, animated: true)
         }
+
+        // set the thumbnail view for the top half and set a transparency/blur effect
+        if !UIAccessibilityIsReduceTransparencyEnabled() {
+            if let thumbnailImageURL = self.business.imageURL {
+                self.thumbnailImageView.setImageWith(thumbnailImageURL)
+                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
+                blurEffectView.effect = blurEffect
+                self.blurEffectView.alpha = 0.6
+            }
+        }
+        
+        // set a border on the map view
+        self.mapView.layer.borderColor = UIColor.gray.cgColor
+        self.mapView.layer.borderWidth = 0.3
+        
+        // set a border on the call cell
+        self.callCell.layer.borderColor = UIColor.gray.cgColor
+        self.callCell.layer.borderWidth = 0.3
         
 //        if !UIAccessibilityIsReduceTransparencyEnabled() {
 //            self.view.backgroundColor = UIColor.clear
