@@ -47,6 +47,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.rowHeight = 50
+        
         // Do any additional setup after loading the view.
     }
 
@@ -87,6 +88,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell;
         cell.switchLabel.text = "Offering a Deal"
         cell.delegate = self
+        cell.selectionStyle = .none        
         return cell
     }
     
@@ -94,12 +96,14 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         if self.settings.distanceExpanded == false {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "ExpandCell") as! ExpandCell
             cell.expandLabel.text = self.settings.distances[self.settings.distanceSelectedIndex]
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
             cell.delegate = self
             cell.radioButtonLabel.text = self.settings.distances[indexPath.row]
             cell.radioButton.isSelected = self.settings.distanceSelectedIndex == indexPath.row ? true : false
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -108,12 +112,14 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         if self.settings.sortByExpanded == false {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "ExpandCell") as! ExpandCell
             cell.expandLabel.text = self.settings.sortBy[self.settings.sortBySelectedIndex]
+            cell.selectionStyle = .none
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCell(withIdentifier: "RadioButtonCell") as! RadioButtonCell
             cell.delegate = self
             cell.radioButtonLabel.text = self.settings.sortBy[indexPath.row]
             cell.radioButton.isSelected = self.settings.sortBySelectedIndex == indexPath.row ? true : false
+            cell.selectionStyle = .none
             return cell
         }
     }
@@ -123,20 +129,24 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             if indexPath.row >= 0 && indexPath.row < 3 {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
                 cell.switchLabel.text = self.categories[indexPath.row]["name"]
+                cell.selectionStyle = .none
                 return cell
             } else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
                 cell.seeMoreLabel.text =  "See More"
+                cell.selectionStyle = .none
                 return cell
             }
         } else {
             if indexPath.row >= 1 && indexPath.row <= self.categories.count {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
                 cell.switchLabel.text = self.categories[indexPath.row - 1]["name"]
+                cell.selectionStyle = .none
                 return cell
             } else {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SeeMoreCell") as! SeeMoreCell
                 cell.seeMoreLabel.text =  "See Less"
+                cell.selectionStyle = .none
                 return cell
             }
         }
@@ -184,7 +194,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.settings.distanceExpanded = !self.settings.distanceExpanded;
         
         // 3. reload table with animation
-        let indexSet = IndexSet(indexPath)
+        let indexSet = IndexSet(integer: indexPath.section)
         self.tableView.reloadSections(indexSet, with: .fade)
     }
     
@@ -199,7 +209,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.settings.sortByExpanded = !self.settings.sortByExpanded;
         
         // 3. reload table with animation
-        let indexSet = IndexSet(indexPath)        
+        let indexSet = IndexSet(integer: indexPath.section)
         self.tableView.reloadSections(indexSet, with: .fade)
     }
     
@@ -209,7 +219,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         if (self.settings.seeAll == false && indexPath.row == 3) ||
             (self.settings.seeAll == true  && indexPath.row == 0) {
             self.settings.seeAll = !self.settings.seeAll
-            let indexSet = IndexSet(indexPath)
+            let indexSet = IndexSet(integer: indexPath.section)
             self.tableView.reloadSections(indexSet, with: .fade)
         }
         
@@ -249,8 +259,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 self.settings.sortBySelectedIndex = indexPath.row
                 self.settings.sortByExpanded = false
             }
-            let indexSet = IndexSet(indexPath)
-
+            let indexSet = IndexSet(integer: indexPath.section)
             self.tableView.reloadSections(indexSet, with: .fade)
         }
     }
