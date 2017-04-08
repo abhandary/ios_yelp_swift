@@ -16,6 +16,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     var searchBar : UISearchBar!
     var businesses: [Business]?
     
+    var settings  = Settings()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -89,7 +91,21 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
      }
      */
     
+    @IBAction func unWindFromSettings(segue : UIStoryboardSegue) {
+        if segue.identifier == "saveSegue" {
+            let fvc = segue.source as! FiltersViewController
+            self.settings = fvc.settings
+        }
+    }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "presentFiltersSegue" {
+            let nvc = segue.destination as! UINavigationController
+            let fvc = nvc.topViewController as! FiltersViewController
+            fvc.settings = self.settings
+        }
+    }
     
 }
 

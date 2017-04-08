@@ -78,8 +78,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             return self.settings.sortByExpanded ? 3 : 1
         case .category:
             return self.settings.seeAll ?  self.categories.count + 1 : 4
-        default :
-            return 0
         }
        
     }
@@ -88,7 +86,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell;
         cell.switchLabel.text = "Offering a Deal"
         cell.delegate = self
-        cell.selectionStyle = .none        
+        cell.selectionStyle = .none
         return cell
     }
     

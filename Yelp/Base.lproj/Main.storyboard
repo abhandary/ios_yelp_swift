@@ -112,7 +112,7 @@
                     <navigationItem key="navigationItem" id="jcd-6w-81a">
                         <barButtonItem key="leftBarButtonItem" title="Filter" id="8Xy-gu-8xT">
                             <connections>
-                                <segue destination="IXA-f4-XdT" kind="presentation" id="iHm-VN-2qu"/>
+                                <segue destination="IXA-f4-XdT" kind="presentation" identifier="presentFiltersSegue" id="iHm-VN-2qu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -268,14 +268,23 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Filters" id="64d-bK-f6M">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="1eI-SN-nll"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="aXk-0B-kut"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="1eI-SN-nll">
+                            <connections>
+                                <segue destination="ASN-QM-4y3" kind="unwind" identifier="cancelSegue" unwindAction="unWindFromSettingsWithSegue:" id="rK6-Vl-VJN"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="aXk-0B-kut">
+                            <connections>
+                                <segue destination="ASN-QM-4y3" kind="unwind" identifier="saveSegue" unwindAction="unWindFromSettingsWithSegue:" id="FyA-YU-1uN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="y7R-qE-TjL" id="ayn-Uo-ZON"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEX-0m-KFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ASN-QM-4y3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4487.1999999999998" y="357.57121439280365"/>
         </scene>
