@@ -344,17 +344,17 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Goch Japanese Fusion Tapas" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAQ-8U-WeD">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="0.9 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTl-ed-0Jb">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Japanese, Tapas/Small Plates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qF-lm-2z6">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -367,7 +367,7 @@
                                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m7E-gz-CdJ"/>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6s-vw-TSB">
                                                     <string key="text">I don't ever yelp but wanted to make sure that I came on and gave an awesome review to my waitress, Tara. You could tell she had a million things going on...</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -376,7 +376,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="6qF-lm-2z6" secondAttribute="trailing" constant="15" id="2ro-va-P5P"/>
                                                 <constraint firstItem="hAQ-8U-WeD" firstAttribute="leading" secondItem="TDs-9b-Q6t" secondAttribute="leading" constant="15" id="BIl-wa-n0f"/>
                                                 <constraint firstAttribute="bottom" secondItem="D6s-vw-TSB" secondAttribute="bottom" constant="10" id="HcW-9v-pHl"/>
-                                                <constraint firstAttribute="trailing" secondItem="cTl-ed-0Jb" secondAttribute="trailing" constant="8" id="JRF-RG-iN1"/>
+                                                <constraint firstAttribute="trailing" secondItem="cTl-ed-0Jb" secondAttribute="trailing" constant="15" id="JRF-RG-iN1"/>
                                                 <constraint firstAttribute="trailing" secondItem="m7E-gz-CdJ" secondAttribute="trailing" id="JcF-JG-Vo2"/>
                                                 <constraint firstItem="m7E-gz-CdJ" firstAttribute="top" secondItem="6qF-lm-2z6" secondAttribute="bottom" constant="22" id="LmW-aa-eK0"/>
                                                 <constraint firstItem="Y7I-1w-IHX" firstAttribute="leading" secondItem="TDs-9b-Q6t" secondAttribute="leading" constant="15" id="R2J-iU-p09"/>
@@ -384,7 +384,7 @@
                                                 <constraint firstItem="6qF-lm-2z6" firstAttribute="top" secondItem="Y7I-1w-IHX" secondAttribute="bottom" constant="8" id="W6p-Nh-VpE"/>
                                                 <constraint firstItem="cTl-ed-0Jb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hAQ-8U-WeD" secondAttribute="trailing" constant="8" id="XaY-PZ-p16"/>
                                                 <constraint firstItem="6qF-lm-2z6" firstAttribute="leading" secondItem="TDs-9b-Q6t" secondAttribute="leading" constant="15" id="YHI-qL-pTL"/>
-                                                <constraint firstItem="cTl-ed-0Jb" firstAttribute="top" secondItem="TDs-9b-Q6t" secondAttribute="top" constant="17" id="YrE-hL-N5w"/>
+                                                <constraint firstItem="cTl-ed-0Jb" firstAttribute="top" secondItem="TDs-9b-Q6t" secondAttribute="top" constant="25" id="YrE-hL-N5w"/>
                                                 <constraint firstItem="m7E-gz-CdJ" firstAttribute="leading" secondItem="TDs-9b-Q6t" secondAttribute="leading" id="cHk-QL-3Lc"/>
                                                 <constraint firstAttribute="trailing" secondItem="D6s-vw-TSB" secondAttribute="trailing" constant="15" id="dbs-MR-r35"/>
                                                 <constraint firstItem="Y7I-1w-IHX" firstAttribute="top" secondItem="hAQ-8U-WeD" secondAttribute="bottom" constant="7" id="kqW-78-B0w"/>
