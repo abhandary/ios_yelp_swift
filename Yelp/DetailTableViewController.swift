@@ -116,9 +116,9 @@ class DetailTableViewController: UITableViewController {
 
     
 
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 50
-    }
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 50
+//    }
     
     // MARK: - Table view data source
 

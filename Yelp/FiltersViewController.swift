@@ -87,6 +87,25 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
        
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 { return nil; }
+        
+        let view = UIView();
+        let label = UILabel()
+        label.frame = CGRect(x: 10, y: 15, width: 320, height: 20)
+        label.font =  UIFont.boldSystemFont(ofSize: 16)
+      
+        if section == 1 {
+            label.text = "Distance"
+        } else if section == 2 {
+            label.text = "Sort By"
+        } else if section == 3 {
+            label.text = "Category"
+        }
+        view.addSubview(label)
+        return view
+    }
+    
     func dealCell () -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell;
         cell.switchLabel.text = "Offering a Deal"
@@ -178,6 +197,14 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 30
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
