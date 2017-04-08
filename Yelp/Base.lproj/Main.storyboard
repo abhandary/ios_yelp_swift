@@ -176,7 +176,7 @@
                                         <rect key="frame" x="0.0" y="105" width="375" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jih-ke-koX" id="HLg-xv-DvU">
-                                            <frame key="frameInset" width="375" height="76.5"/>
+                                            <frame key="frameInset" width="375" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jz5-Hn-MVo">
@@ -186,8 +186,8 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="A8n-8s-89O">
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="35" id="gi1-Nn-EOV"/>
-                                                        <constraint firstAttribute="width" constant="35" id="yCp-X9-0rS"/>
+                                                        <constraint firstAttribute="height" constant="20" id="gi1-Nn-EOV"/>
+                                                        <constraint firstAttribute="width" constant="20" id="yCp-X9-0rS"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
@@ -519,7 +519,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="down-arrow" width="64" height="64"/>
+        <image name="down-arrow" width="20" height="20"/>
         <image name="phone" width="15" height="15"/>
     </resources>
 </document>
