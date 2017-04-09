@@ -112,6 +112,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         // add annotations to map view
         var coordinate = CLLocationCoordinate2DMake(37.0,-122.0);
         var annotation = MKPointAnnotation()
+        self.mapView.removeAnnotations(self.mapView.annotations);
         if let businesses = self.businesses {
             for business in businesses {
                 if let lat = business.lat,
@@ -190,6 +191,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         if segue.identifier == "searchSegue" {
             let fvc = segue.source as! FiltersViewController
             self.settings = fvc.settings
+            loadMoreOffset = loadLimit + 1 // reset the offset back
             doSearch(offset: 0)
         }
     }
@@ -282,6 +284,7 @@ extension BusinessesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         settings.searchString = searchBar.text!
         searchBar.resignFirstResponder()
+        loadMoreOffset = loadLimit + 1 // reset the offset back        
         doSearch(offset: 0)
     }
 }
