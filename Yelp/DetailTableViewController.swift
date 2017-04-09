@@ -52,7 +52,7 @@ class DetailTableViewController: UITableViewController {
             self.distance.text = distance
         }
         
-        self.snippetText.text = business.snippetText
+        self.snippetText.text = " 👤 " + business.snippetText!
         self.phoneNumber.text = business.displayPhone
         
         if let reviewCountNum = business.reviewCount {
