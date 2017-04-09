@@ -32,7 +32,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [x] Details page shows a small map view to show the restraunt location
+- [x] Details page shows a small map view to show the restaurant's location
 - [x] Use of blur effect for the background image shown in the details page 
 - [x] Ability to place a call to the restraunt from the details page 
 - [x] Use of animation in toggling the custom UISwitch
