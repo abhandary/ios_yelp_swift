@@ -18,6 +18,7 @@ class DetailTableViewController: UITableViewController {
     var ratingsImage : UIImage?
 
     
+    @IBOutlet weak var reviewCount: UILabel!
     @IBOutlet weak var topSectionContentView: UIView!
     @IBOutlet weak var topSectionFirstHalfView: UIView!
     @IBOutlet weak var topSectionSecondHalfView: UIView!
@@ -38,6 +39,7 @@ class DetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         self.name.text = business.name
         if ratingsImage != nil {
             self.ratingsImageView.image = ratingsImage
@@ -52,6 +54,10 @@ class DetailTableViewController: UITableViewController {
         
         self.snippetText.text = business.snippetText
         self.phoneNumber.text = business.displayPhone
+        
+        if let reviewCountNum = business.reviewCount {
+            self.reviewCount.text = "\(reviewCountNum) Reviews"
+        }
         
         if let lat = business.lat,
             let lon = business.lon {
@@ -80,33 +86,23 @@ class DetailTableViewController: UITableViewController {
         self.mapView.layer.borderWidth = 0.3
         
         // set a border on the call cell
-        self.callCell.layer.borderColor = UIColor.gray.cgColor
-        self.callCell.layer.borderWidth = 0.3
+       // self.callCell.layer.borderColor = UIColor.gray.cgColor
+       // self.callCell.layer.borderWidth = 0.3
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        if !UIAccessibilityIsReduceTransparencyEnabled() {
-//            self.view.backgroundColor = UIColor.clear
-//            if let thumbnailImageURL = self.business.imageURL {
-//                let thumbnailImageView = UIImageView()
-//                thumbnailImageView.frame = self.topSectionFirstHalfView.bounds
-//                thumbnailImageView.setImageWith(thumbnailImageURL)
-//                thumbnailImageView.contentMode = UIViewContentMode.scaleToFill
-//                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
-//                let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//                blurEffectView.alpha = 0.01
-//                blurEffectView.frame = self.topSectionFirstHalfView.bounds
-//                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//                self.topSectionFirstHalfView.insertSubview(blurEffectView, at: 0)
-//                self.topSectionFirstHalfView.insertSubview(thumbnailImageView, at: 0)
-//            }
-//        } else {
-//            self.view.backgroundColor = UIColor.black
-//        }
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        if indexPath.section == 1 {
+            // place call
+         
+            if var phone = business.displayPhone {
+                let index = phone.index(phone.startIndex, offsetBy: 1);
+                phone = phone.substring(from: index)
+                let telURL = URL(string: "tel:" + phone)
+                UIApplication.shared.openURL(telURL!)
+            }
+        }
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -120,7 +116,19 @@ class DetailTableViewController: UITableViewController {
     }
 
     
-
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 1
+        } else if section == 1{
+            return 30;
+        }
+        return 0
+    }
+    
+//    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        //return 0;
+    // }
+    
 //    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
 //        return 50
 //    }
