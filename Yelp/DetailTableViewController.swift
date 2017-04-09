@@ -99,7 +99,9 @@ class DetailTableViewController: UITableViewController {
                 let index = phone.index(phone.startIndex, offsetBy: 1);
                 phone = phone.substring(from: index)
                 let telURL = URL(string: "tel:" + phone)
-                UIApplication.shared.openURL(telURL!)
+                if UIApplication.shared.canOpenURL(telURL!) {
+                    UIApplication.shared.openURL(telURL!)
+                }
             }
         }
         self.tableView.deselectRow(at: indexPath, animated: true)
