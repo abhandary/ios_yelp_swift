@@ -48,9 +48,9 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/abhandary/ios_yelp_swift/blob/master/yelper_demo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<img src='' title='Search Bar Demo' width='' alt='Search Bar Demo' />
+<img src='https://github.com/abhandary/ios_yelp_swift/blob/master/yelper_demo_searchbar.gif' title='Search Bar Demo' width='' alt='Search Bar Demo' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
