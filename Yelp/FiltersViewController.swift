@@ -173,14 +173,14 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 return cell
             }
         } else {
-            if indexPath.row >= 1 && indexPath.row <= self.categories.count {
+            if indexPath.row >= 0 && indexPath.row < self.categories.count {
                 let cell = self.tableView.dequeueReusableCell(withIdentifier: "SwitchCell") as! SwitchCell
 
                 cell.selectionStyle = .none
                 cell.delegate = self
                 
-                // set the lable text
-                cell.switchLabel.text = self.categories[indexPath.row - 1]["name"]
+                // set the label text
+                cell.switchLabel.text = self.categories[indexPath.row]["name"]
                 
                 // set the switch state
                 if self.settings.selectedCategories.contains(self.categories[indexPath.row]["code"]!) {
@@ -201,10 +201,6 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 20
     }
-    
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 30
-//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -271,7 +267,7 @@ class FiltersViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         // if this is a toggle request then toggle the seeAll bool
         if (self.settings.seeAll == false && indexPath.row == 3) ||
-            (self.settings.seeAll == true  && indexPath.row == 0) {
+            (self.settings.seeAll == true) {
             self.settings.seeAll = !self.settings.seeAll
             let indexSet = IndexSet(integer: indexPath.section)
             self.tableView.reloadSections(indexSet, with: .fade)
