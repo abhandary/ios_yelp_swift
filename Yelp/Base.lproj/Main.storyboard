@@ -20,6 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MCT-o2-zre"/>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="102" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wqh-xn-Seu">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -27,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="102"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i4u-tQ-iX8" id="bub-cI-SMH">
-                                            <frame key="frameInset" width="375" height="101.5"/>
+                                            <frame key="frameInset" width="375" height="101"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fnS-AQ-Exi">
@@ -107,7 +108,11 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="wqh-xn-Seu" secondAttribute="trailing" id="Bzc-u2-dWd"/>
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="wqh-xn-Seu" secondAttribute="bottom" id="CoN-s0-cWu"/>
+                            <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="MCT-o2-zre" secondAttribute="bottom" id="Lii-XZ-2ea"/>
                             <constraint firstItem="wqh-xn-Seu" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="e05-8C-mLb"/>
+                            <constraint firstItem="MCT-o2-zre" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="ga9-Ed-efg"/>
+                            <constraint firstAttribute="trailing" secondItem="MCT-o2-zre" secondAttribute="trailing" id="h4m-OY-cP2"/>
+                            <constraint firstItem="MCT-o2-zre" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leading" id="lgr-RX-JY1"/>
                             <constraint firstItem="wqh-xn-Seu" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" id="npA-ap-kHg"/>
                         </constraints>
                     </view>
@@ -117,9 +122,15 @@
                                 <segue destination="IXA-f4-XdT" kind="presentation" identifier="presentFiltersSegue" id="iHm-VN-2qu"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="LPr-ZD-J0B">
+                            <connections>
+                                <action selector="mapButtonBarClicked:" destination="2xI-yr-O5N" id="sa7-m9-NIS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="filterButton" destination="8Xy-gu-8xT" id="j39-fq-PkR"/>
+                        <outlet property="mapView" destination="MCT-o2-zre" id="LAL-Zs-x0k"/>
                         <outlet property="tableView" destination="wqh-xn-Seu" id="C1g-pC-qJd"/>
                     </connections>
                 </viewController>

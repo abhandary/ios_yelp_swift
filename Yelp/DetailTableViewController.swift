@@ -16,6 +16,7 @@ class DetailTableViewController: UITableViewController {
 
     var business : Business!
     var ratingsImage : UIImage?
+
     
     @IBOutlet weak var topSectionContentView: UIView!
     @IBOutlet weak var topSectionFirstHalfView: UIView!
@@ -38,7 +39,11 @@ class DetailTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.name.text = business.name
-        self.ratingsImageView.image = ratingsImage
+        if ratingsImage != nil {
+            self.ratingsImageView.image = ratingsImage
+        } else {
+            self.ratingsImageView.setImageWith(business.ratingImageURL!)
+        }
         self.address.text = business.address
         
         if let distance = business.distance {

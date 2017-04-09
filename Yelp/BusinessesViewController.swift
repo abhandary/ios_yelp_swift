@@ -8,15 +8,18 @@
 
 import UIKit
 import MBProgressHUD
+import MapKit
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate  {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
     var searchBar : UISearchBar!
     var businesses: [Business]?
     
+    var nameToBusiness  = [String : Business] ()
     var settings  = Settings()
     
     // infinite scroll related
@@ -27,7 +30,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // setup map view
+        self.mapView.delegate = self
         
         // setup search bar
         searchBar = UISearchBar();
@@ -46,7 +50,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         Business.searchWithTerm(term: "Restaurants", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
-            self.tableView.reloadData()
+            // self.tableView.reloadData()
+            self.reloadListAndMapViews()
             if let businesses = businesses {
                 for business in businesses {
                    // print(business.name!)
@@ -70,7 +75,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
          */
         
     }
-    
+    // MARK: - Do Search
     func doSearch(offset : Int) {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         var radius : Int? = nil
@@ -91,11 +96,49 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                 } else {
                     self.businesses?.append(contentsOf: businesses!)
                 }
-                self.tableView.reloadData()
+                // self.tableView.reloadData()
+                self.reloadListAndMapViews()
             }
         }
         
     }
+    
+    // MARK: - Reload List and Map Views
+    func reloadListAndMapViews() {
+        
+        // reload table view
+        self.tableView.reloadData()
+        
+        // add annotations to map view
+        var coordinate = CLLocationCoordinate2DMake(37.0,-122.0);
+        var annotation = MKPointAnnotation()
+        if let businesses = self.businesses {
+            for business in businesses {
+                if let lat = business.lat,
+                    let lon = business.lon {
+                    coordinate = CLLocationCoordinate2DMake(lat, lon)
+                    annotation = MKPointAnnotation()
+                    annotation.coordinate = coordinate
+                    annotation.title = business.name
+                    annotation.subtitle = business.address
+                    
+                    // var placemark = MKPlacemark(coordinate: coordinate , addressDictionary: nil);
+                    // placemark.title = business.name
+                    self.nameToBusiness[annotation.title! + annotation.subtitle!] = business
+                    self.mapView.addAnnotation(annotation)
+
+                }
+            }
+            
+            self.mapView.selectAnnotation(annotation, animated: true);
+            let  viewRegion =
+                MKCoordinateRegionMakeWithDistance(coordinate, 2000, 2000);
+            let adjustedRegion = self.mapView.regionThatFits(viewRegion)
+            self.mapView.setRegion(adjustedRegion, animated: true)
+        }
+    }
+    
+    // MARK: - UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.businesses?.count ?? 0;
@@ -125,12 +168,6 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
                 loadMoreOffset += loadLimit
             }
         }
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
@@ -166,13 +203,63 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
         else if segue.identifier == "showDetailSegue" {
             let detailVC = segue.destination as! DetailTableViewController
-            let cell = sender as! BusinessCell
-            self.tableView.deselectRow(at: self.tableView.indexPath(for: cell)!, animated: true)
-            detailVC.business = self.businesses![(self.tableView.indexPath(for: cell)!.row)]
-            detailVC.ratingsImage = cell.starsImageView.image
+            if let cell = sender as? BusinessCell {
+                self.tableView.deselectRow(at: self.tableView.indexPath(for: cell)!, animated: true)
+                detailVC.business = self.businesses![(self.tableView.indexPath(for: cell)!.row)]
+                detailVC.ratingsImage = cell.starsImageView.image
+            } else if let view = sender as? MKPinAnnotationView {
+                if let business = nameToBusiness[view.annotation!.title!! + view.annotation!.subtitle!!] {
+                    detailVC.business = business
+                }
+            }
         }
     }
     
+    
+    // MARK: - Map View Related
+    
+    @IBAction func mapButtonBarClicked(_ sender: UIBarButtonItem) {
+        
+        if sender.title == "Map" {
+            let transitionParams :  UIViewAnimationOptions = [.transitionFlipFromRight, .showHideTransitionViews]
+            UIView.transition(from: self.tableView,
+                              to: self.mapView,
+                              duration: 0.5,
+                              options: transitionParams,
+                              completion: nil);
+        } else {
+            let transitionParams :  UIViewAnimationOptions = [.transitionFlipFromLeft, .showHideTransitionViews]
+            UIView.transition(from: self.mapView,
+                              to: self.tableView,
+                              duration: 0.5,
+                              options: transitionParams,
+                              completion: nil);
+        }
+        sender.title = sender.title == "List" ? "Map" : "List"
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "loc")
+        
+        annotationView.canShowCallout = true
+        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        
+        // annotationView.image = UIImage(named: "phone.png")
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        self.performSegue(withIdentifier: "showDetailSegue", sender: view)
+    }
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
 }
 
 extension BusinessesViewController: UISearchBarDelegate {

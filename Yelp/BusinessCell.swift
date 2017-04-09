@@ -43,7 +43,7 @@ class BusinessCell: UITableViewCell {
                 self.thumbnailImage.setImageWith(URLRequest(url: url), placeholderImage: nil,
                                                  success: { (urlRequest, imageResponse, image) in
                                                     if imageResponse != nil {
-                                                        
+
                                                         self.thumbnailImage?.alpha = 0.0
                                                         self.thumbnailImage?.image = image
                                                         self.thumbnailImage?.contentMode = UIViewContentMode.scaleToFill

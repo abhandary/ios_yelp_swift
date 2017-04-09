@@ -9,8 +9,12 @@
 import UIKit
 
 class Business: NSObject {
-    let name: String?
+    
+    // address
     let address: String?
+    
+    let name: String?
+
     let imageURL: URL?
     let categories: String?
     let distance: String?
