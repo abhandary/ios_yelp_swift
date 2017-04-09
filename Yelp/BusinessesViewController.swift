@@ -284,7 +284,7 @@ extension BusinessesViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         settings.searchString = searchBar.text!
         searchBar.resignFirstResponder()
-        loadMoreOffset = loadLimit + 1 // reset the offset back        
+        loadMoreOffset = loadLimit + 1 // reset the offset back
         doSearch(offset: 0)
     }
 }
