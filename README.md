@@ -2,7 +2,7 @@
 
 **Yelper** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
 
-Project Leaderboard Rank: 2 (out of 80 cohorts)
+Project Leaderboard Rank: **2** (out of 80 cohorts)
 
 Time spent: **15** hours spent in total
 
